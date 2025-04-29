@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, UserIcon, LockIcon } from "lucide-react";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -17,81 +18,143 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Left Side - Login */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-4 sm:p-8">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-md py-10 px-12">
-          {/* Logo and Title */}
-          <div className="flex flex-col items-center mb-10">
-            <img src="/api/placeholder/96/96" alt="Company Logo" className="h-20 w-20 mb-4" />
-            <h2 className="text-2xl font-bold text-gray-800">Welcome to Time</h2>
-            <p className="text-gray-500 text-base mt-2">Please sign in to your account</p>
-          </div>
-          
-          {/* Form */}
-          <form className="space-y-6">
-            <div>
-              <Label htmlFor="email" className="block text-base font-medium text-gray-700 mb-2">Email Address</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                defaultValue="test_admin@texas.com"
-                className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="password" className="block text-base font-medium text-gray-700 mb-2">Password</Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(prev => !prev)}
-                  className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="remember" className="rounded h-4 w-4" />
-                <Label htmlFor="remember" className="text-base text-gray-600">Remember Me</Label>
-              </div>
-              <button type="button" className="text-base text-blue-600 hover:text-blue-800">
-                Forgot Password?
-              </button>
-            </div>
-            
-            <div className="pt-4">
-              <Button
-                type="button"
-                onClick={handleLogin}
-                className="w-full h-12 bg-blue-600 text-white hover:bg-blue-700 rounded-lg text-base font-medium"
-              >
-                Sign In
-              </Button>
-            </div>
-          </form>
-          
-          <div className="mt-8 text-center">
-            <p className="text-gray-500 text-base">
-              Having trouble? <a href="#" className="text-blue-600 hover:underline">Contact Support</a>
-            </p>
-          </div>
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Left Side - Image and Branding */}
+      <div className="md:w-1/2 bg-indigo-700 p-8 flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
+            alt="Office" 
+            className="object-cover w-full h-full opacity-20"
+          />
+        </div>
+        <div className="relative z-10 text-white text-center max-w-md">
+          <h1 className="text-5xl font-bold mb-8">Welcome to TimeTrack</h1>
+          <p className="text-xl text-white/90">Manage your time efficiently with our powerful attendance system</p>
         </div>
       </div>
 
-      {/* Right Side - Image */}
-      <div className="hidden lg:block lg:w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('/api/placeholder/1200/900')" }}>
-        <div className="h-full w-full bg-blue-600 opacity-15"></div>
+      {/* Right Side - Login Form */}
+      <div className="md:w-1/2 bg-gray-100 p-8 flex items-center justify-center">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
+            <p className="mt-3 text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link href="/auth/signup" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                Sign up kk
+              </Link>
+            </p>
+          </div>
+
+          <form className="mt-10 space-y-8 bg-white p-8 rounded-xl shadow-lg" onSubmit={(e) => e.preventDefault()}>
+            <div className="space-y-6">
+              <div>
+                <Label htmlFor="email" className="text-sm font-medium text-gray-700 mb-1 block">
+                  Email address
+                </Label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <UserIcon className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                    placeholder="Enter your email"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="password" className="text-sm font-medium text-gray-700 mb-1 block">
+                  Password
+                </Label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <LockIcon className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    required
+                    className="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3"
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className="h-5 w-5 text-gray-400 hover:text-gray-500 transition-colors" />
+                    ) : (
+                      <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-500 transition-colors" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Checkbox
+                  id="remember-me"
+                  name="remember-me"
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                />
+                <Label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                  Remember me
+                </Label>
+              </div>
+
+              <div className="text-sm">
+                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                  Forgot your password?
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <Button
+                type="submit"
+                onClick={handleLogin}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+              >
+                Sign in
+              </Button>
+            </div>
+            
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                className="py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+              >
+                Google
+              </button>
+              <button
+                type="button"
+                className="py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+              >
+                Microsoft
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
