@@ -29,7 +29,6 @@ export default function Sidebar() {
 
     return (
         <div className={`bg-[#0D1524] text-white transition-all duration-300 flex flex-col ${collapsed ? 'w-16' : 'w-80'} h-screen`}>
-            {/* Top Section */}
             <div className="flex justify-between items-center px-5 py-5">
                 {!collapsed && <div className="text-2xl font-bold tracking-wide">GMi</div>}
                 <button onClick={() => setCollapsed(!collapsed)} className="text-white">
@@ -113,14 +112,14 @@ function SidebarSection({
             <div className="flex items-center justify-between cursor-pointer px-3 py-2 hover:bg-gray-800 rounded-md" onClick={onToggle}>
                 <div className="flex items-center gap-3">
                     {icon}
-                    {!collapsed && <span className="font-semibold text-[20px]">{title}</span>}
+                    {!collapsed && <span className="font-semibold text-[18px]">{title}</span>}
                 </div>
                 {!collapsed && (open ? <FiChevronUp /> : <FiChevronDown />)}
             </div>
             {open && !collapsed && (
                 <div className="ml-7 mt-1 space-y-2">
                     {items.map(({ icon, label, href }, i) => (
-                        <Link key={i} href={href} className="flex items-center gap-2 hover:text-gray-300 transition">
+                        <Link key={i} href={href} className=" text-[16px] flex items-center gap-2 hover:text-gray-300 transition">
                             {icon}
                             <span>{label}</span>
                         </Link>

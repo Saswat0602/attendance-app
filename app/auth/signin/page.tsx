@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon, UserIcon, LockIcon } from "lucide-react";
+import { FcGoogle } from 'react-icons/fc';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -22,9 +23,9 @@ export default function SignInPage() {
       {/* Left Side - Image and Branding */}
       <div className="md:w-1/2 bg-indigo-700 p-8 flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
-            alt="Office" 
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+            alt="Office"
             className="object-cover w-full h-full opacity-20"
           />
         </div>
@@ -42,7 +43,7 @@ export default function SignInPage() {
             <p className="mt-3 text-sm text-gray-600">
               Don't have an account?{' '}
               <Link href="/auth/signup" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
-                Sign up kk
+                Sign up
               </Link>
             </p>
           </div>
@@ -129,7 +130,7 @@ export default function SignInPage() {
                 Sign in
               </Button>
             </div>
-            
+
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-200"></div>
@@ -138,20 +139,16 @@ export default function SignInPage() {
                 <span className="px-2 bg-white text-gray-500">Or continue with</span>
               </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-3">
+
+            <div className="mt-6  gap-3">
               <button
                 type="button"
-                className="py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
               >
+                <FcGoogle className="w-5 h-5 mr-2" />
                 Google
               </button>
-              <button
-                type="button"
-                className="py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
-              >
-                Microsoft
-              </button>
+
             </div>
           </form>
         </div>
